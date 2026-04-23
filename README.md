@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abishek Portfolio</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+body { scroll-behavior: smooth; }
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg,#0dfd51,#101ff2);
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+/* PROFILE */
+.profile-img {
+  width:150px;
+  border-radius:50%;
+  border:4px solid white;
+  transition:0.4s;
+}
+.profile-img:hover { transform:scale(1.1); }
+
+/* CARD */
+.card {
+  transition:0.3s;
+}
+.card:hover {
+  transform:translateY(-10px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* BUTTON */
+.btn-custom {
+  background:white;
+  color:#0d6efd;
+}
+.btn-custom:hover {
+  background:black;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+<div class="container">
+<a class="navbar-brand">Abishek</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+<li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+<li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+<li class="nav-item"><a href="#cargo" class="nav-link">Cargo System</a></li>
+<li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+<div class="container" data-aos="fade-up">
+<img src="https://via.placeholder.com/150" class="profile-img mb-3">
+<h1>Hello, I'm Abishek 👋</h1>
+<h4>Java Developer | Full Stack Developer</h4>
+<a href="#projects" class="btn btn-custom mt-3">View Projects</a>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="p-5 text-center">
+<div class="container" data-aos="fade-right">
+<h2>About Me</h2>
+<p>I build Java MVC systems, web apps, and database-driven solutions.</p>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="p-5">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">Projects</h2>
+
+<div class="row g-4">
+
+<!-- Employee -->
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card p-3">
+<h5>Employee System</h5>
+<p>Java JDBC CRUD system</p>
+<button class="btn btn-primary btn-sm" onclick="showProject('emp')">View</button>
+</div>
+</div>
+
+<!-- Student -->
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card p-3">
+<h5>Student System</h5>
+<p>Student management CRUD system</p>
+<button class="btn btn-primary btn-sm" onclick="showProject('student')">View</button>
+</div>
+</div>
+
+<!-- AI -->
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card p-3">
+<h5>AI Assistant</h5>
+<p>Smart chatbot system</p>
+<button class="btn btn-primary btn-sm" onclick="showProject('ai')">View</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CARGO SYSTEM -->
+<section id="cargo" class="bg-light p-5">
+<div class="container">
+
+<h2 class="text-center mb-4" data-aos="fade-up">Cargo Management System</h2>
+
+<input type="text" id="searchBox" class="form-control mb-3" placeholder="Search Cargo ID..." onkeyup="searchCargo()">
+
+<div class="table-responsive" data-aos="zoom-in">
+<table class="table table-bordered text-center">
+<thead class="table-dark">
+<tr>
+<th>ID</th><th>Customer</th><th>From</th><th>To</th><th>Status</th><th>Action</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="p-5 text-center">
+<div class="container">
+<h2>Contact</h2>
+<input class="form-control mb-2" placeholder="Name">
+<input class="form-control mb-2" placeholder="Email">
+<textarea class="form-control mb-2" placeholder="Message"></textarea>
+<button class="btn btn-dark">Send</button>
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="modal fade" id="cargoModal">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5>Cargo Details</h5>
+<button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body" id="details"></div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="projectModal">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5>Project Details</h5>
+<button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body" id="projectDetails"></div>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center p-3">
+© 2026 Abishek Portfolio
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({ duration:1000 });
+
+let cargos = [
+{id:"C001",name:"John",from:"Colombo",to:"Kandy",status:"In Transit"},
+{id:"C002",name:"Nimal",from:"Galle",to:"Jaffna",status:"Delivered"},
+{id:"C003",name:"Kamal",from:"Kurunegala",to:"Colombo",status:"Delayed"}
+];
+
+function loadTable(data){
+let html="";
+data.forEach(c=>{
+html+=`
+<tr>
+<td>${c.id}</td>
+<td>${c.name}</td>
+<td>${c.from}</td>
+<td>${c.to}</td>
+<td>${c.status}</td>
+<td><button class="btn btn-primary btn-sm" onclick="view('${c.id}')">View</button></td>
+</tr>`;
+});
+document.getElementById("tableBody").innerHTML=html;
+}
+
+function view(id){
+let c=cargos.find(x=>x.id===id);
+document.getElementById("details").innerHTML=`
+<b>ID:</b> ${c.id}<br>
+<b>Name:</b> ${c.name}<br>
+<b>From:</b> ${c.from}<br>
+<b>To:</b> ${c.to}<br>
+<b>Status:</b> ${c.status}`;
+new bootstrap.Modal(document.getElementById('cargoModal')).show();
+}
+
+function searchCargo(){
+let val=document.getElementById("searchBox").value.toLowerCase();
+let filtered=cargos.filter(c=>c.id.toLowerCase().includes(val));
+loadTable(filtered);
+}
+
+/* PROJECT SYSTEM */
+function showProject(type){
+let data={
+emp:"Employee System: Java + JDBC CRUD operations",
+student:"Student System: Add, update, delete, search students using Java + database",
+ai:"AI Assistant: Smart chatbot using JavaScript / API integration"
+};
+document.getElementById("projectDetails").innerHTML=data[type];
+new bootstrap.Modal(document.getElementById('projectModal')).show();
+}
+
+loadTable(cargos);
+</script>
+
+</body>
+</html>
